@@ -8,6 +8,29 @@ var github = require('./lib/github'),
   responders = require('./lib/responders'),
   links = require('./lib/links');
 
+/**
+ * Ramsey Bot
+ *
+ * Technically this project isn't a bot, but a collection
+ * of node.js modules, one of which is a bot.  I choose,
+ * however to tie them all togeth using the bot.js module.
+ *
+ * The cool thing is that technically you don't absolutely
+ * have to do this.  I've tried my hardest to keep all the
+ * modules as decoupled from IRC as possible.  Obviously
+ * in a few cases this wasn't possible, but in the vast
+ * majority, these modules can be mixed and matched in
+ * ways I never intended.
+ *
+ * What follows below is a "configuration" file which
+ * ties all the included modules together to make an
+ * IRC bot which can act on Webhooks from Github,
+ * monitor a Cruise Buildserver, make shorturls,
+ * and respond to commands from users in a channel.
+ *
+ **/
+
+
 /** 
  * IRC BOT SETUP 
  * 
