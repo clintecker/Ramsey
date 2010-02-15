@@ -119,10 +119,6 @@ var app_routes = [
   },
 ];
 
-routes.setup_views(app_routes, function(channel, line) {
-  mybot.send(channel, line);
-});
-
 // Starting up an HTTP server to support our github module
 var httpserver = http.createServer(function (request, response) {
   var content = "";
@@ -203,6 +199,61 @@ cruise.addListener("finished", function(name, status, url) {
 
 cruise.get_feed(); // kicks it off
 /** END CRUISE BUILD SERVER SETUP **/
+
+/** BEGIN RESPONDERS AND LINK HARVESTER SETUP
+ * This is a command list which is meant to be passed to
+ * responders.route.  Each command has a regex which is
+ * checked against each line.  
+ *
+ * If the line matches your regex, the router will store
+ * the name of the channel that the command was issued 
+ * from and pass the raw line to your view and store
+ * your view's output.
+ *
+ * The view should output a list of lines.  The router 
+ * will iterate over this list and send each one along
+ * with the above channel to your responder function.
+ *
+ * In the below example we do nothing with the output
+ * from push_link and we simply send the channel/line
+ * combo to our IRC bot for get_links.
+ **/
+var commands = [
+  {
+    // Respond to this command
+    regex: /\~links/,
+    // Send raw line to this method
+    view: links.get_links,
+    // Send channel and view output to this method
+    responder: function(channel, line){
+      mybot.send(channel, line);
+    },
+    name: 'show links',
+  },
+  {
+    regex: links.link_pattern, // We provide a nice link pattern
+    view: links.push_link,
+    responder: function(channel, line){
+      // No output
+    },
+    name: 'capture links',
+  },
+]; 
+
+/** 
+ * You can wire up any number of custom responders that
+ * follow the above pattern.
+ **/
+
+// Call responders.route on each line we recieve
+// from the server.
+mybot.addListener("receive", function(data){
+  responders.route(commands, [
+    /turdburglar/,
+  ], data);
+});
+/** END RESPONDERS AND LINK HARVESTER SETUP **/
+
 
 process.addListener("SIGINT", function() {
   sys.puts("Quitting HTTP");
