@@ -4,7 +4,9 @@ var github = require('./lib/github'),
   routes = require('./lib/routes'),
   bot = require('./lib/bot'),
   http = require('http'),
-  sys = require('sys');
+  sys = require('sys'),
+  responders = require('./lib/responders'),
+  links = require('./lib/links');
 
 /** 
  * IRC BOT SETUP 
