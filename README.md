@@ -18,9 +18,9 @@ focus on recieving and outputting service hooks from Github projects and
 displaying the status of our builds out of Cruise.
 
 Basically, an individual would instantiate these modules and tie them
-together with the supplied callbacks and listeners.  I've included a
+together with the supplied callbacks and listeners. I have included a
 ``settings-example.js`` file which demonstrates how to use all of the
-included modules to create a bot identical to the one we use at Ars.
+included modules to create a bot identical to the one I use.
 
 This however, shouldn't stop you from creating your own modules, command
 responders, tieing the modules together in new ways, or snatching any of
