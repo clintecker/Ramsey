@@ -245,12 +245,15 @@ var commands = [
  * follow the above pattern.
  **/
 
+
+var ignores = [
+  /annoyingperson/,
+  /anotherbot/,
+];
 // Call responders.route on each line we recieve
 // from the server.
 mybot.addListener("receive", function(data){
-  responders.route(commands, [
-    /turdburglar/,
-  ], data);
+  responders.route(commands, ignores, data);
 });
 /** END RESPONDERS AND LINK HARVESTER SETUP **/
 
