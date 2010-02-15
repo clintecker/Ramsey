@@ -23,7 +23,7 @@ together with the supplied callbacks and listeners. I have included a
 included modules to create a bot identical to the one I use.
 
 This however, shouldn't stop you from creating your own modules, command
-responders, tieing the modules together in new ways, or snatching any of
+responders, tying the modules together in new ways, or snatching any of
 the included modules or code from those modules for use in your own,
 non-IRC related node.js projects!
 
